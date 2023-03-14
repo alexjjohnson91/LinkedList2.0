@@ -24,6 +24,9 @@ public:
 	// returns the size of the list
 	unsigned length();
 
+	// empty the list 
+	void clear();
+
 private:
 	struct Node {
 		T value;
@@ -45,6 +48,12 @@ LinkedList<T>::LinkedList() : size(0) {
 // Destructor is actually a bit of a process
 template<typename T>
 LinkedList<T>::~LinkedList() {
+	this->clear();
+}
+
+// delete the list
+template<typename T>
+void LinkedList<T>::clear() {
 	Node* curr = head;
 	Node* next = nullptr;
 
@@ -53,9 +62,10 @@ LinkedList<T>::~LinkedList() {
 		delete curr;
 		curr = next;
 	}
-
-	cout << "list is successfully deleted" << endl;
+	this->size = 0;
 }
+
+
 
 // print the list
 template<typename T>
