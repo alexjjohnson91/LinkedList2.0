@@ -21,6 +21,9 @@ public:
 	// append to the end of the list
 	void append(T val);
 
+	// returns the size of the list
+	unsigned length();
+
 private:
 	struct Node {
 		T value;
@@ -30,12 +33,12 @@ private:
 	};
 
 	Node* head;
-	int size;
+	unsigned size;
 };
 
 // Constructor: set the head to nullptr
 template<typename T>
-LinkedList<T>::LinkedList() {
+LinkedList<T>::LinkedList() : size(0) {
 	head = nullptr;	// just set to null because there is nothing in the list yet 
 }
 
@@ -73,11 +76,12 @@ template<typename T>
 void LinkedList<T>::push_front(T val) {
 	Node* n = new Node(val);
 
-	if (head != nullptr) {
+	if (this->size > 0) {
 		n->next = head;
 	}
 
 	head = n;
+	this->size++;
 }
 
 // push element to the back of the list
@@ -85,7 +89,7 @@ template<typename T>
 void LinkedList<T>::append(T val) {
 	Node* n = new Node(val);
 
-	if (head == nullptr) {
+	if (this->size == 0) {
 		head = n;
 	}
 	else {
@@ -98,5 +102,12 @@ void LinkedList<T>::append(T val) {
 
 		curr->next = n;
 	}
+
+	(this->size)++;
 }
 
+// size: returns the length of the list
+template<typename T>
+unsigned LinkedList<T>::length() {
+	return this->size;
+}
