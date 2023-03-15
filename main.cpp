@@ -26,5 +26,14 @@ int main() {
 	cout << "Expected Length:	6" << endl;
 	cout << "Actual Length:		" << list.length() << endl;
 
+	list.remove(2);
+
+	cout << "Expected:		6,1,3,4,5" << endl;
+	cout << "Actual:\t\t";
+	list.print();
+
+	cout << list.length() << endl;
+	
+
 	return 0;
 }

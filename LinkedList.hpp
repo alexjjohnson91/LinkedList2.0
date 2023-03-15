@@ -27,6 +27,10 @@ public:
 	// empty the list 
 	void clear();
 
+	// delete element i in the list
+	void remove(int index);
+
+
 private:
 	struct Node {
 		T value;
@@ -120,4 +124,31 @@ void LinkedList<T>::append(T val) {
 template<typename T>
 unsigned LinkedList<T>::length() {
 	return this->size;
+}
+
+// delete: deletes the ith element of the list (index 0)
+template<typename T>
+void LinkedList<T>::remove(int index) {
+	Node* curr = head;
+	Node* prev = nullptr;
+
+	// iterate through the list until curr == ith element
+	for (int i = 0; i < index; i++) {
+		prev = curr;
+		curr = curr->next;
+	}
+
+	// now mark the element to remove, and move curr to i+1 element
+	Node* remove = curr;
+	curr = curr->next;
+
+	// delete remove
+	delete remove;
+	remove = nullptr;
+
+	// set new links between prev and curr (around the removed element)
+	prev->next = curr;
+	
+	// decrement the size of the list
+	this->size--;
 }
